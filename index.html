@@ -58,30 +58,49 @@ textarea{border-radius:18px;min-height:95px;resize:vertical}
 </section>
 
 <section id="login" class="screen">
-<div class="top-row"><button class="icon-btn" onclick="showScreen('welcome')">‹</button><span></span><span></span></div>
-<div class="script">Welcome Back</div><p class="subtitle">Sign in to continue your family's support journey.</p>
-<input placeholder="Email address" type="email"><input placeholder="Password" type="password">
-<button class="big-button" onclick="showScreen('home')">Sign In</button>
-<button class="outline-button" onclick="showScreen('waitlist')">Create Account / Join Waitlist</button>
-<div class="card quote" style="margin-top:22px;">You are the expert on your child.<br>This app just helps carry the map.</div>
-type=" for?</option><option>Autism resources</option><option>ADHD resources</option><option 
-                                                                                      
-<form name="waitlist" method="POST" data-netlify="true">
-<input type="hidden" name="form-name" value="waitlist">
-<input type="text" name="first_name" placeholder="First Name" required
+  <div class="top-row">
+    <button class="icon-btn" onclick="showScreen('welcome')">‹</button>
+    <span></span>
+    <span></span>
+  </div>
+  <div class="script">Welcome Back</div>
+  <p class="subtitle">Sign in to continue your family's support journey.</p>
+  <input placeholder="Email address" type="email">
+  <input placeholder="Password" type="password">
+
+Sign In
+Create Account / Join Waitlist
+
+  <div class="card quote" style="margin-top:22px;">
+    You are the expert on your child.<br>This app just helps carry the map.
+  </div>
+</section>
+<section id="waitlist" class="screen">
+  <div class="top-row">
+    <button class="icon-btn" onclick="showScreen('welcome')">‹</button>
+    <span></span>
+    <span></span>
+  </div>
+  <div class="script">Join the First Families</div>
+  <p class="subtitle">Get early access to The Invisible Capes Navigator.</p>
+  <form name="waitlist" method="POST" data-netlify="true">
+    <input type="hidden" name="form-name" value="waitlist">
+<input type="text" name="first_name" placeholder="First Name" required>
 <input type="email" name="email" placeholder="Email Address" required>
 <select name="support_needed">
-<option>What support are you looking for?</option>
-<option>Autism Resources</option>
-<option>ADHD Resources</option>
-<option>IEP / 504 Help</option>
-<option>Funding & Benefits</option>
-<option>Therapies & Evaluations</option>
+  <option>What support are you looking for?</option>
+  <option>Autism Resources</option>
+  <option>ADHD Resources</option>
+  <option>IEP / 504 Help</option>
+  <option>Funding & Benefits</option>
+  <option>Therapies & Evaluations</option>
 </select>
-<button type="submit" class="big-button">
-Join Waitlist
-</button>
-</form>
+<button type="submit" class="big-button">Join Waitlist</button>
+  </form>
+
+Preview the App
+
+</section>
 <section id="home" class="screen">
 <div class="top-row"><button class="icon-btn">☰</button><span>9:41</span><button class="icon-btn">🔔</button></div>
 <div class="hero"><h1>Welcome, Superhero</h1><p>You’re doing an incredible job.</p></div>
