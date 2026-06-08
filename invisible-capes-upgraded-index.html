@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Invisible Capes Navigator</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{min-height:100vh;font-family:Georgia,"Times New Roman",serif;background:radial-gradient(circle at top,rgba(255,188,102,.35),transparent 30%),linear-gradient(135deg,#101b24,#30495a);display:flex;justify-content:center;align-items:center;padding:16px;color:#2d1d16}
+.phone{width:390px;max-width:100%;height:835px;background:#f7e4ca;border-radius:42px;border:10px solid #111;overflow:hidden;position:relative;box-shadow:0 30px 80px rgba(0,0,0,.45)}
+.notch{width:120px;height:30px;background:#050505;border-radius:0 0 18px 18px;margin:0 auto;position:relative;z-index:5}
+.screen{display:none;height:calc(100% - 30px);overflow-y:auto;padding:22px 20px 88px;background:linear-gradient(rgba(255,235,205,.80),rgba(255,235,205,.94)),radial-gradient(circle at top right,#ffc36e,transparent 28%),linear-gradient(#ffe0b5,#d88b52)}
+.screen.active{display:block}
+.top-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;font-family:Arial,sans-serif;font-weight:bold}
+.icon-btn{width:38px;height:38px;border-radius:50%;border:none;background:rgba(255,248,235,.88);font-size:20px;box-shadow:0 5px 14px rgba(0,0,0,.12);cursor:pointer}
+.script{font-family:"Brush Script MT","Segoe Script",cursive;font-size:35px;font-weight:normal;line-height:1;color:#321d16;text-align:center;margin-bottom:8px}
+.brand-title{font-size:24px;letter-spacing:2px;text-align:center;line-height:1.15;text-transform:uppercase;margin-bottom:8px}
+.subtitle{text-align:center;font-size:16px;color:#49342a;margin-bottom:18px}
+.hero{min-height:225px;border-radius:28px;padding:22px;margin-bottom:18px;color:white;background:linear-gradient(rgba(42,20,14,.05),rgba(42,20,14,.72)),radial-gradient(circle at top right,#ffcf88,transparent 30%),linear-gradient(145deg,#d96c38,#243646);box-shadow:0 10px 28px rgba(0,0,0,.25);display:flex;flex-direction:column;justify-content:flex-end}
+.hero h1{font-size:34px;line-height:1;margin-bottom:8px;text-shadow:0 3px 8px rgba(0,0,0,.35)}
+.hero p{font-size:17px;text-shadow:0 2px 7px rgba(0,0,0,.4)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin-bottom:16px}
+.tile{border:none;border-radius:19px;padding:17px 10px;color:white;min-height:112px;font-family:Arial,sans-serif;font-weight:bold;font-size:15px;box-shadow:0 8px 18px rgba(0,0,0,.24);cursor:pointer}
+.tile span{display:block;font-size:33px;margin-bottom:8px}
+.red{background:linear-gradient(145deg,#8d2530,#c65845)}.teal{background:linear-gradient(145deg,#125f67,#2b9291)}.orange{background:linear-gradient(145deg,#a94e24,#dc8b43)}.gold{background:linear-gradient(145deg,#a76c22,#dfb05a)}.purple{background:linear-gradient(145deg,#59336f,#9153a1)}.green{background:linear-gradient(145deg,#495c2d,#879647)}
+.card{background:rgba(255,248,235,.90);border:1px solid rgba(132,82,42,.18);border-radius:22px;padding:17px;margin-bottom:13px;box-shadow:0 7px 18px rgba(0,0,0,.12)}
+.card h3{font-size:19px;margin-bottom:5px}.card p{font-family:Arial,sans-serif;font-size:14px;color:#4e3d34}
+.arrow-card{display:flex;justify-content:space-between;align-items:center;gap:12px;cursor:pointer}
+.arrow{width:38px;height:38px;border-radius:50%;background:#151515;color:white;display:grid;place-items:center;font-size:23px;flex-shrink:0}
+.quote{font-family:"Brush Script MT","Segoe Script",cursive;font-size:25px;text-align:center;color:#4c2418;line-height:1.05}
+.avatar{width:138px;height:138px;border-radius:50%;margin:0 auto 12px;background:radial-gradient(circle at top,#ffd9a6,#995533);border:5px solid rgba(255,248,235,.9);box-shadow:0 8px 20px rgba(0,0,0,.22);display:grid;place-items:center;font-size:64px}
+.profile{text-align:center}.name{font-size:34px;font-weight:bold;margin-bottom:4px}.details{font-family:Arial,sans-serif;font-size:14px;line-height:1.6;margin-bottom:15px}
+.brush-label{display:inline-block;background:#2f7774;color:white;padding:7px 18px;border-radius:6px 18px 6px 18px;font-family:Arial,sans-serif;font-weight:bold;margin-bottom:10px}
+.row{display:flex;align-items:center;gap:13px;background:rgba(255,248,235,.90);border-radius:18px;padding:13px;margin-bottom:10px;box-shadow:0 6px 14px rgba(0,0,0,.11);font-family:Arial,sans-serif}
+.row strong{font-size:14px}.row small{color:#5c463b}
+.circle{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;color:white;font-weight:bold;flex-shrink:0}
+.big-button{width:100%;border:none;border-radius:999px;padding:17px;background:#111;color:white;font-weight:bold;font-size:16px;margin-top:12px;cursor:pointer;box-shadow:0 8px 18px rgba(0,0,0,.25)}
+.outline-button{width:100%;border:2px solid #3b241a;border-radius:999px;padding:14px;background:rgba(255,248,235,.55);color:#2d1d16;font-weight:bold;font-size:15px;margin-top:10px;cursor:pointer}
+.search,input,select,textarea{width:100%;border:none;border-radius:999px;padding:15px 18px;margin:5px 0 13px;background:rgba(255,248,235,.96);box-shadow:0 6px 15px rgba(0,0,0,.12);font-family:Arial,sans-serif;font-size:15px}
+textarea{border-radius:18px;min-height:95px;resize:vertical}
+.progress-wrap{background:rgba(255,248,235,.9);padding:15px;border-radius:20px;margin-bottom:14px;box-shadow:0 6px 15px rgba(0,0,0,.11)}
+.progress-bar{width:100%;height:13px;background:#ead3b7;border-radius:999px;overflow:hidden;margin-top:8px}.progress-fill{width:42%;height:100%;background:linear-gradient(90deg,#2f7774,#d79a3d)}
+.bottom-nav{position:absolute;left:0;right:0;bottom:0;height:75px;background:rgba(255,238,213,.97);border-top:1px solid rgba(104,60,30,.2);display:grid;grid-template-columns:repeat(5,1fr);z-index:5}
+.bottom-nav button{background:transparent;border:none;font-size:11px;font-family:Arial,sans-serif;color:#3d281e;cursor:pointer}.bottom-nav span{display:block;font-size:22px;margin-bottom:2px}
+@media(max-height:850px){.phone{height:94vh}}
+</style>
+</head>
+<body>
+<div class="phone">
+<div class="notch"></div>
+
+<section id="welcome" class="screen active">
+<div class="brand-title">The Invisible Capes</div><div class="script">Navigator</div>
+<p class="subtitle">Guidance. Support. Resources. All in one place.</p>
+<div class="hero"><h1>You are not carrying this alone.</h1><p>A parent support app for services, paperwork, school help, funding, and next steps.</p></div>
+<button class="big-button" onclick="showScreen('login')">Get Started →</button>
+<button class="outline-button" onclick="showScreen('waitlist')">Join Waitlist</button>
+</section>
+
+<section id="login" class="screen">
+<div class="top-row"><button class="icon-btn" onclick="showScreen('welcome')">‹</button><span></span><span></span></div>
+<div class="script">Welcome Back</div><p class="subtitle">Sign in to continue your family's support journey.</p>
+<input placeholder="Email address" type="email"><input placeholder="Password" type="password">
+<button class="big-button" onclick="showScreen('home')">Sign In</button>
+<button class="outline-button" onclick="showScreen('waitlist')">Create Account / Join Waitlist</button>
+<div class="card quote" style="margin-top:22px;">You are the expert on your child.<br>This app just helps carry the map.</div>
+</section>
+
+<section id="waitlist" class="screen">
+<div class="top-row"><button class="icon-btn" onclick="showScreen('welcome')">‹</button><span></span><span></span></div>
+<div class="script">Join the First Families</div><p class="subtitle">Get early access to The Invisible Capes Navigator.</p>
+<input placeholder="First name"><input placeholder="Email address" type="email">
+<select><option>What support are you looking for?</option><option>Autism resources</option><option>ADHD resources</option><option>IEP / 504 help</option><option>Funding and benefits</option><option>Therapy and evaluations</option></select>
+<button class="big-button" onclick="alert('Prototype only. Later this can connect to a real email signup form.')">Join Waitlist</button>
+<button class="outline-button" onclick="showScreen('home')">Preview the App</button>
+</section>
+
+<section id="home" class="screen">
+<div class="top-row"><button class="icon-btn">☰</button><span>9:41</span><button class="icon-btn">🔔</button></div>
+<div class="hero"><h1>Welcome, Superhero</h1><p>You’re doing an incredible job.</p></div>
+<div class="progress-wrap"><strong>Family Support Progress</strong><div class="progress-bar"><div class="progress-fill"></div></div><small>42% of your starter roadmap is organized.</small></div>
+<div class="grid">
+<button class="tile red" onclick="showScreen('school')"><span>🎓</span>School Support</button>
+<button class="tile teal" onclick="showScreen('resources')"><span>🧩</span>Therapies & Evaluations</button>
+<button class="tile orange" onclick="showScreen('funding')"><span>🤲</span>Financial Help</button>
+<button class="tile gold" onclick="showScreen('vault')"><span>📁</span>Paperwork Organizer</button>
+<button class="tile purple" onclick="showScreen('appointments')"><span>📅</span>Appointments & Reminders</button>
+<button class="tile green" onclick="showScreen('community')"><span>👨‍👩‍👧</span>Parent Support</button>
+</div>
+<div class="card arrow-card" onclick="showScreen('roadmap')"><div><h3>What Should I Do Next?</h3><p>Answer a few questions and get your next steps.</p></div><div class="arrow">›</div></div>
+<div class="card quote">Some capes are chosen.<br>Others are placed on your shoulders without warning.</div>
+</section>
+
+<section id="child" class="screen">
+<div class="top-row"><button class="icon-btn" onclick="showScreen('home')">‹</button><span></span><button class="icon-btn">＋</button></div>
+<div class="script">My Child</div><div class="profile"><div class="avatar">😊</div><div class="name">Jordan ♥</div><div class="details">Age 7 • Male<br>Autism Spectrum Disorder<br>Lincoln Elementary School</div></div>
+<div class="brush-label">Current Services</div>
+<div class="row"><div class="circle teal">✓</div><div><strong>Speech Therapy</strong><br><small>1x per week</small></div></div>
+<div class="row"><div class="circle gold">✓</div><div><strong>Occupational Therapy</strong><br><small>2x per week</small></div></div>
+<div class="row"><div class="circle purple">✓</div><div><strong>School Support Plan</strong><br><small>IEP meeting notes saved</small></div></div>
+<button class="big-button" onclick="showScreen('editChild')">Edit Child Profile →</button>
+</section>
+
+<section id="editChild" class="screen">
+<div class="top-row"><button class="icon-btn" onclick="showScreen('child')">‹</button><span></span><span></span></div>
+<div class="script">Edit Profile</div>
+<input placeholder="Child name"><input placeholder="Age"><input placeholder="School">
+<select><option>Main diagnosis / concern</option><option>Autism</option><option>ADHD</option><option>Dyslexia</option><option>Speech delay</option><option>Developmental delay</option><option>Sensory processing</option></select>
+<textarea placeholder="Notes about strengths, needs, services, or concerns"></textarea>
+<button class="big-button" onclick="showScreen('child')">Save Profile</button>
+</section>
+
+<section id="roadmap" class="screen">
+<div class="top-row"><button class="icon-btn" onclick="showScreen('home')">‹</button><span></span><button class="icon-btn">⚙</button></div>
+<div class="script">The Roadmap</div><p class="subtitle">Personalized next steps for your family.</p>
+<div class="row"><div class="circle red">1</div><div><strong>Request a school evaluation in writing</strong><br><small>Status: next step</small></div><div class="arrow">›</div></div>
+<div class="row"><div class="circle teal">2</div><div><strong>Ask pediatrician about referrals</strong><br><small>Developmental, speech, OT, or behavioral support</small></div><div class="arrow">›</div></div>
+<div class="row"><div class="circle gold">3</div><div><strong>Research waiver and benefit programs</strong><br><small>Start with your state resources</small></div><div class="arrow">›</div></div>
+<div class="row"><div class="circle purple">4</div><div><strong>Upload evaluations and paperwork</strong><br><small>Keep everything in one place</small></div><div class="arrow">›</div></div>
+<div class="row"><div class="circle green">5</div><div><strong>Connect with parent support</strong><br><small>You should not have to do this alone</small></div><div class="arrow">›</div></div>
+</section>
+
+<section id="resources" class="screen">
+<div class="top-row"><button class="icon-btn" onclick="showScreen('home')">‹</button><span></span><button class="icon-btn">↻</button></div>
+<div class="script">Resources</div><input class="search" placeholder="🔍 Search resources...">
+<div class="brush-label">Vermont First</div>
+<div class="row"><div class="circle teal">VT</div><div><strong>Vermont Family Network</strong><br><small>Parent support, advocacy, and family resources</small></div></div>
+<div class="row"><div class="circle red">IEP</div><div><strong>Vermont Special Education</strong><br><small>School support, rights, and evaluation guidance</small></div></div>
+<div class="row"><div class="circle gold">$</div><div><strong>Vermont Benefits & Waivers</strong><br><small>Funding, Medicaid, and family support options</small></div></div>
+<div class="brush-label">Helpful Categories</div>
+<div class="row"><div class="circle teal">🧩</div><div><strong>Autism Resources</strong><br><small>Guides, tips, and support</small></div></div>
+<div class="row"><div class="circle purple">AD</div><div><strong>ADHD Resources</strong><br><small>Behavior, school support, and daily tools</small></div></div>
+<div class="row"><div class="circle green">📚</div><div><strong>Dyslexia & Learning</strong><br><small>Reading support, evaluations, and school help</small></div></div>
+<div class="row"><div class="circle orange">⚖</div><div><strong>Advocacy & Your Rights</strong><br><small>Know what to ask for and how to document it</small></div></div>
+</section>
+
+<section id="community" class="screen">
+<div class="top-row"><button class="icon-btn" onclick="showScreen('home')">‹</button><span></span><button class="icon-btn">❤</button></div>
+<div class="script">You Are Not Alone</div><div class="quote" style="font-size:34px;margin:22px 0;">Together we<br>carry the weight.</div>
+<div class="row"><div class="circle green">👪</div><div><strong>Parent Community</strong><br><small>Connect and share</small></div><div class="arrow">›</div></div>
+<div class="row"><div class="circle red">❤</div><div><strong>Encouragement</strong><br><small>Daily reminders for hard days</small></div><div class="arrow">›</div></div>
+<div class="row"><div class="circle gold">📖</div><div><strong>Stories of Strength</strong><br><small>Real parents. Real journeys.</small></div><div class="arrow">›</div></div>
+<div class="row"><div class="circle purple">💬</div><div><strong>Ask for Feedback</strong><br><small>Get help from other parents</small></div><div class="arrow">›</div></div>
+</section>
+
+<section id="school" class="screen">
+<div class="top-row"><button class="icon-btn" onclick="showScreen('home')">‹</button><span></span><button class="icon-btn">✎</button></div>
+<div class="script">School Support</div><p class="subtitle">IEP, 504, evaluations, school notes, and meeting help.</p>
+<div class="card"><h3>IEP Meeting Checklist</h3><p>Know what to bring, what to ask, and what to request.</p></div>
+<div class="card"><h3>Evaluation Request Letter</h3><p>A simple template to ask the school for an evaluation.</p></div>
+<div class="card"><h3>504 Plan Guide</h3><p>Understand accommodations and supports.</p></div>
+<div class="card"><h3>Meeting Notes</h3><p>Track school conversations and follow-ups.</p></div>
+<button class="big-button">Start School Plan →</button>
+</section>
+
+<section id="vault" class="screen">
+<div class="top-row"><button class="icon-btn" onclick="showScreen('home')">‹</button><span></span><button class="icon-btn">＋</button></div>
+<div class="script">Paperwork Organizer</div><p class="subtitle">Keep evaluations, IEPs, therapy notes, and benefits paperwork organized.</p>
+<div class="grid"><button class="tile teal"><span>📄</span>Evaluations</button><button class="tile red"><span>🏫</span>IEP / 504</button><button class="tile gold"><span>🩺</span>Medical</button><button class="tile purple"><span>📝</span>Therapy Notes</button></div>
+<button class="big-button" onclick="alert('Prototype only: real uploads need a backend like Firebase or Supabase.')">Upload Document →</button>
+</section>
+
+<section id="appointments" class="screen">
+<div class="top-row"><button class="icon-btn" onclick="showScreen('home')">‹</button><span></span><button class="icon-btn">＋</button></div>
+<div class="script">Appointments</div><p class="subtitle">Track therapy visits, evaluations, and school meetings.</p>
+<div class="card"><h3>Speech Therapy</h3><p>Tuesday at 3:30 PM</p></div><div class="card"><h3>OT Evaluation</h3><p>Friday at 10:00 AM</p></div><div class="card"><h3>IEP Meeting</h3><p>Add school meeting notes and reminders.</p></div>
+<button class="big-button">Add Appointment →</button>
+</section>
+
+<section id="funding" class="screen">
+<div class="top-row"><button class="icon-btn" onclick="showScreen('home')">‹</button><span></span><button class="icon-btn">?</button></div>
+<div class="script">Financial Help</div><p class="subtitle">Find benefits, grants, waiver programs, and support.</p>
+<div class="card"><h3>State Waiver Programs</h3><p>Start here for long-term services and supports.</p></div><div class="card"><h3>Medicaid Resources</h3><p>Learn what may be available in your state.</p></div><div class="card"><h3>Therapy Grants</h3><p>Find possible help for therapies, sensory tools, and equipment.</p></div><div class="card"><h3>Respite Support</h3><p>Explore caregiver break options and family support programs.</p></div>
+</section>
+
+<nav class="bottom-nav">
+<button onclick="showScreen('home')"><span>🏠</span>Home</button>
+<button onclick="showScreen('child')"><span>👩‍👦</span>My Child</button>
+<button onclick="showScreen('roadmap')"><span>📖</span>Roadmap</button>
+<button onclick="showScreen('resources')"><span>📚</span>Resources</button>
+<button onclick="showScreen('community')"><span>•••</span>More</button>
+</nav>
+</div>
+<script>
+function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active')}
+</script>
+</body>
+</html>
